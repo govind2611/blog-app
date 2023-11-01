@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
-import './BlogCard.css';
+import "./BlogCard.css";
 
 function BlogCard({ blogData, homepage }) {
   const [isEdit, setIsEdit] = useState();
@@ -23,10 +23,8 @@ function BlogCard({ blogData, homepage }) {
       )
       .then((res) => {
         if (res.data.status === 200) {
+          window.location.reload();
           toast.success(res.data.message);
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
         } else {
           toast.error(res.data.message);
         }
@@ -60,10 +58,8 @@ function BlogCard({ blogData, homepage }) {
       })
       .then((res) => {
         if (res.data.status === 200) {
+          window.location.reload();
           toast.success(res.data.message);
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
         } else {
           toast.error(res.data.message);
         }
@@ -95,17 +91,19 @@ function BlogCard({ blogData, homepage }) {
     <Card>
       <Card.Body>
         <div className="wrapper">
-        <div className="card-title">{blogData.title}</div>
-        <div className="card-text timestamp">
-          {formatCreationDateTime(blogData.creationDateTime)}
+          <div className="card-title">{blogData.title}</div>
+          <div className="card-text timestamp">
+            {formatCreationDateTime(blogData.creationDateTime)}
+          </div>
         </div>
-        </div>
-       
+
         <div className="card-text">{blogData.textBody}</div>
 
         {homepage ? (
           <>
-            <div className="card-text created-by">Created By - {blogData.username}</div>
+            <div className="card-text created-by">
+              Created By - {blogData.username}
+            </div>
           </>
         ) : (
           <>
@@ -130,7 +128,7 @@ function BlogCard({ blogData, homepage }) {
           <>
             <Form
               onSubmit={(e) => handleSubmit(e, blogData._id)}
-              style={{ marginTop: '2rem' }}
+              style={{ marginTop: "2rem" }}
             >
               <Form.Group className="mb-3" controlId="title">
                 <Form.Label>Title</Form.Label>

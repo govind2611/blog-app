@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -7,6 +7,15 @@ import './Login.css';
 function Login() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (token) {
+      window.location.href = "/homepage";
+      toast.success("Welcome Back, Chief");
+    }
+  }, [token])
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,10 +30,8 @@ function Login() {
       .then((res) => {
         if (res.data.status === 200) {
           localStorage.setItem("token", res.data.data.token);
-          toast.success(res.data.message);
-          setTimeout(() => {
             window.location.href = "/homepage";
-          }, 500);
+            toast.success(res.data.message);
         } else {
           toast.error(res.data.message);
         }

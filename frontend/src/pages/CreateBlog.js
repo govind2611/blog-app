@@ -12,10 +12,8 @@ function CreateBlog() {
 
   useEffect(() => {
     if (!token) {
+      window.location.href = "/login";
       toast.warn("You are not logged in. Please Login First ");
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 1000);
     }
   }, [token]);
 
@@ -35,10 +33,8 @@ function CreateBlog() {
       })
       .then((res) => {
         if (res.data.status === 201) {
+          window.location.href = "/my-blogs";
           toast.success(res.data.message);
-          setTimeout(() => {
-            window.location.href = "/my-blogs";
-          }, 500);
         } else {
           toast.error(res.data.message);
         }

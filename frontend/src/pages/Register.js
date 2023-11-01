@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -9,6 +9,14 @@ function Register() {
   const [name, setName] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (token) {
+      window.location.href = "/homepage";
+      toast.success("Welcome Back, Chief");
+    }
+  }, [token])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,11 +32,8 @@ function Register() {
       .post(`${process.env.REACT_APP_BACKEND_URL}/user/register`, userObj)
       .then((res) => {
         if (res.data.status === 201) {
+          window.location.href = "/login";
           toast.success(res.data.message);
-          setTimeout(() => {
-            window.location.href = "/login";
-          }, 500);
-
         } else {
           toast.error(res.data.message);
         }

@@ -22,10 +22,8 @@ function UserCard({ userData }) {
       )
       .then((res) => {
         if (res.data.status === 201) {
-          toast.success(res.data.message);
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
+          window.location.reload();
+            toast.success(res.data.message);
         } else {
           toast.error(res.data.message);
         }
@@ -57,10 +55,8 @@ function UserCard({ userData }) {
       )
       .then((res) => {
         if (res.data.status === 200) {
-          toast.success(res.data.message);
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
+          window.location.reload();
+            toast.success(res.data.message);
         } else {
           toast.error(res.data.message);
         }

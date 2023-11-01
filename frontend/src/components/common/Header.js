@@ -9,10 +9,8 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    window.location.href = "login";
     toast.success("Logout successful");
-    setTimeout(() => {
-      window.location.href = "login";
-    }, 500);
   };
 
   return (

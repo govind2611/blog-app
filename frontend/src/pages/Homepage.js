@@ -9,10 +9,8 @@ function Homepage() {
 
   useEffect(() => {
     if (!token) {
+      window.location.href = "/login";
       toast.warn("Please Login First");
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 1000);
     } else {
       axios
         .get(`${process.env.REACT_APP_BACKEND_URL}/blog/homepage-blogs`, {
@@ -43,11 +41,17 @@ function Homepage() {
 
   return (
     <div>
-      <h1 style={{ fontSize: '32px',
-  fontWeight: 'bold',
-  textAlign: 'center',
-  margin: '30px 0',
-  color: '#007bff' }}>Blog Central Hub</h1>
+      <h1
+        style={{
+          fontSize: "32px",
+          fontWeight: "bold",
+          textAlign: "center",
+          margin: "30px 0",
+          color: "#007bff",
+        }}
+      >
+        Blog Central Hub
+      </h1>
       {homepageBlogs?.length > 0 ? (
         homepageBlogs.map((blog) => (
           <BlogCard blogData={blog} homepage={true} />

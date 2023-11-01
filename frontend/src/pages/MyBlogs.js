@@ -9,10 +9,8 @@ function MyBlogs() {
 
   useEffect(() => {
     if (!token) {
-      toast.warn("You are not logged in. Please Login First ");
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 500);
+      window.location.href = "/login";
+        toast.warn("You are not logged in. Please Login First ");
     } else {
       axios
         .get(`${process.env.REACT_APP_BACKEND_URL}/blog/get-user-blogs`, {
